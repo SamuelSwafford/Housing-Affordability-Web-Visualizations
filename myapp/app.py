@@ -1,3 +1,4 @@
+import pandas as pd
 from flask import Flask, render_template, request, send_from_directory
 from myapp.heatmap import plot_housing_affordability
 from myapp.five_city_line_plot import plot_affordability_vs_time
@@ -6,13 +7,14 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    """
-    Renders the home page of the web application.
+    # Read the CSV file
+    df = pd.read_csv('myapp/resources/data_interpolated.csv')
 
-    If the request method is POST, retrieves the selected year and cities from the form data.
-    Constructs the URLs for the plot and line plot based on the selected year and cities.
-    Passes the year, plot URL, and line plot URL as variables to the index.html template.
-    """
+    # Extract the unique city-state combinations
+    cities = df[['CityName', 'StateName']].drop_duplicates()
+    cities['CityState'] = cities['CityName'] + ', ' + cities['StateName']
+    city_options = cities['CityState'].tolist()
+
     year = None
     plot_url = None
     line_plot_url = None
@@ -25,7 +27,7 @@ def home():
         city5 = request.form.get('city5')
         plot_url = f'/plot/{year}'
         line_plot_url = f'/line_plot/{city1}/{city2}/{city3}/{city4}/{city5}'
-    return render_template('index.html', year=year, plot_url=plot_url, line_plot_url=line_plot_url)
+    return render_template('index.html', year=year, plot_url=plot_url, line_plot_url=line_plot_url, city_options=city_options)
 
 @app.route('/plot/<int:year>')
 def plot(year):
