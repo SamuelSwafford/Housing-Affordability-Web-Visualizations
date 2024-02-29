@@ -4,7 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-def plot_data(data_file, column1, column2):
+def plot_bar_and_line(data_file, column1, column2):  # Renamed function
     # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(data_file)
 
@@ -35,4 +35,4 @@ if __name__ == '__main__':
     data_file = 'data_interpolated.csv'
     column1 = 'column1_name'
     column2 = 'column2_name'
-    plot_data(data_file, column1, column2)
+    plot_bar_and_line(data_file, column1, column2)
