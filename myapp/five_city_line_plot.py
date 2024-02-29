@@ -21,6 +21,7 @@ def plot_affordability_vs_time(city1, city2, city3, city4, city5):
     plt.title('Affordability vs Time')
     plt.legend()
     plt.savefig('static/five_city_line_plot.png')
+    plt.close(fig)
 
 if __name__ == '__main__':
     plot_affordability_vs_time('City1', 'City2', 'City3', 'City4', 'City5')
