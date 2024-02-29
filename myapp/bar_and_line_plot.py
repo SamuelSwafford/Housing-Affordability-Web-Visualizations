@@ -1,4 +1,7 @@
 import pandas as pd
+import matplotlib
+# Ensure matplotlib does not use any Xwindows backend.
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 def plot_data(data_file, column1, column2):
@@ -24,11 +27,12 @@ def plot_data(data_file, column1, column2):
     ax2.set_ylabel(column2)
     plt.title(f'{column1} and {column2} over Time')
 
-    # Show the plot
-    plt.show()
+    plt.savefig('static/bar_and_line_plot.png.png')
+    plt.close(fig)
 
-# Example usage
-data_file = 'data_interpolated.csv'
-column1 = 'column1_name'
-column2 = 'column2_name'
-plot_data(data_file, column1, column2)
+if __name__ == '__main__':
+    # Example usage
+    data_file = 'data_interpolated.csv'
+    column1 = 'column1_name'
+    column2 = 'column2_name'
+    plot_data(data_file, column1, column2)
