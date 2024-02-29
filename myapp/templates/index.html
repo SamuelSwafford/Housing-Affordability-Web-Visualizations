@@ -38,15 +38,25 @@
                 <option value="{{ city }}">{{ city }}</option>
             {% endfor %}
         </select>
+        <label for="city">City:</label>
+        <select id="city" name="city">
+            {% for city in city_options %}
+                <option value="{{ city }}">{{ city }}</option>
+            {% endfor %}
+        </select>
         <input type="submit" value="Submit">
     </form>
     {% if plot_url %}
-        <h2>Average Housing Affordability by State in {{ year }}</h2>
-        <img src="{{ plot_url }}" alt="Housing Affordability Plot">
+        <h2>Heatmap for {{ year }}</h2>
+        <img src="{{ plot_url }}" alt="Heatmap">
     {% endif %}
     {% if line_plot_url %}
-        <h2>Affordability vs Time for Selected Cities</h2>
+        <h2>Line Plot for {{ city1 }}, {{ city2 }}, {{ city3 }}, {{ city4 }}, and {{ city5 }}</h2>
         <img src="{{ line_plot_url }}" alt="Line Plot">
+    {% endif %}
+    {% if bar_and_line_plot_url %}
+        <h2>Bar and Line Plot for {{ city }}</h2>
+        <img src="{{ bar_and_line_plot_url }}" alt="Bar and Line Plot">
     {% endif %}
 </body>
 </html>
