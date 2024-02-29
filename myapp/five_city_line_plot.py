@@ -1,4 +1,7 @@
 import pandas as pd
+import matplotlib
+# Ensure matplotlib does not use any Xwindows backend.
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 def plot_affordability_vs_time(city1, city2, city3, city4, city5):
