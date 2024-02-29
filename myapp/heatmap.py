@@ -4,11 +4,17 @@ import matplotlib
 # Ensure matplotlib does not use any Xwindows backend.
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import requests
-import zipfile
-import io
 
 def plot_housing_affordability(year):
+    """
+    Plots the average housing affordability by state for a specified year.
+
+    Parameters:
+    - year (int): The year for which to plot the housing affordability.
+
+    Returns:
+    None
+    """
     # Load the data from the uploaded CSV file
     file_path = 'Resources/data_interpolated.csv'
     data = pd.read_csv(file_path)
