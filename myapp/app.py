@@ -9,7 +9,7 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 @app.route('/', methods=['GET', 'POST'])
 def home():
     # Read the CSV file
-    df = pd.read_csv('myapp/resources/data_interpolated.csv')
+    df = pd.read_csv('resources/data_interpolated.csv')
 
     # Extract the unique city-state combinations
     cities = df[['CityName', 'StateName']].drop_duplicates()

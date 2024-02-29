@@ -16,7 +16,7 @@ def plot_housing_affordability(year):
     None
     """
     # Load the data from the uploaded CSV file
-    file_path = 'Resources/data_interpolated.csv'
+    file_path = 'resources/data_interpolated.csv'
     data = pd.read_csv(file_path)
 
     # Filter and Aggregate the Data for the specified year

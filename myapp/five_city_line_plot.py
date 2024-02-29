@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 def plot_affordability_vs_time(city1, city2, city3, city4, city5):
     # Load your data
-    df = pd.read_csv('Resources/data_interpolated.csv')
+    df = pd.read_csv('resources/data_interpolated.csv')
 
     # Filter data for the selected cities
     df_filtered = df[df['City'].isin([city1, city2, city3, city4, city5])]
