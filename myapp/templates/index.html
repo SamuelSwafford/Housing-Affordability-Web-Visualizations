@@ -1,18 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Housing Affordability</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Affordability Visualizations</title>
 </head>
 <body>
-    <h1>Housing Affordability</h1>
-    <form method="POST">
-        <label for="year">Year:</label>
-        <input type="number" id="year" name="year" min="2010" max="2022">
-        <input type="submit" value="Submit">
+    <h1>Housing Affordability Visualizations</h1>
+    
+    <form action="/" method="POST">
+        <div>
+            <label for="year">Select Year:</label>
+            <input type="number" name="year" id="year" required>
+        </div>
+        
+        <div>
+            <label for="city">Select City for Bar and Line Plot:</label>
+            <select name="city" id="city">
+                {% for city in city_options %}
+                <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label>Select Cities for Five City Line Plot:</label>
+            {% for i in range(1, 6) %}
+            <select name="city{{i}}">
+                <option value="">Select a City</option>
+                {% for city in city_options %}
+                <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Generate Plots</button>
     </form>
+
     {% if plot_url %}
-        <h2>Average Housing Affordability by State in {{ year }}</h2>
-        <img src="{{ plot_url }}" alt="Housing Affordability Plot">
+    <h2>Heatmap for Year: {{ year }}</h2>
+    <img src="{{ plot_url }}" alt="Heatmap Plot">
+    {% endif %}
+
+    {% if line_plot_url %}
+    <h2>Five City Line Plot</h2>
+    <img src="{{ line_plot_url }}" alt="Five City Line Plot">
+    {% endif %}
+
+    {% if bar_and_line_plot_url %}
+    <h2>Bar and Line Plot for {{ city }}</h2>
+    <img src="{{ bar_and_line_plot_url }}" alt="Bar and Line Plot">
     {% endif %}
 </body>
 </html>

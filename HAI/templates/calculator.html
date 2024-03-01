@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <form id="haiForm">
+        <label for="median_family_income">Median Family Income ($):</label>
+        <input type="number" id="median_family_income" required>
+
+        <label for="median_home_price">Median Home Price ($):</label>
+        <input type="number" id="median_home_price" required>
+
+        <label for="mortgage_interest_rate">Effective Mortgage Interest Rate (%):</label>
+        <input type="number" id="mortgage_interest_rate" required>
+
+        <label for="down_payment_percent">Down Payment Percentage (%):</label>
+        <input type="number" id="down_payment_percent" required>
+
+        <label for="max_monthly_payment_percent">Max Monthly Payment Percentage of Gross Income (%):</label>
+        <input type="number" id="max_monthly_payment_percent" required>
+
+        <button type="button" onclick="calculateHAI()">Calculate HAI</button>
+    </form>
+
+    <div id="result"></div>
+
+    <div>
+        <canvas id="incomeComparisonChart"></canvas>
+        <canvas id="haiComparisonChart"></canvas>
+    </div>
+
+    <script>
+        function calculateHAI() {
+            // Get user input values
+            var median_family_income = parseFloat(document.getElementById("median_family_income").value);
+            var median_home_price = parseFloat(document.getElementById("median_home_price").value);
+            var mortgage_interest_rate = parseFloat(document.getElementById("mortgage_interest_rate").value);
+            var down_payment_percent = parseFloat(document.getElementById("down_payment_percent").value);
+            var max_monthly_payment_percent = parseFloat(document.getElementById("max_monthly_payment_percent").value);
+
+            // Calculate HAI
+            var down_payment = median_home_price * (down_payment_percent / 100);
+            var loan_amount = median_home_price - down_payment;
+            var monthly_interest_rate = mortgage_interest_rate / 12 / 100;
+            var num_payments = 30 * 12;  // 30-year mortgage
+            var monthly_payment = (loan_amount * monthly_interest_rate) / (1 - Math.pow(1 + monthly_interest_rate, -num_payments));
+
+            var qualifying_income = monthly_payment / (max_monthly_payment_percent / 100);
+            var hai = (median_family_income / qualifying_income) * 100;
+
+            // Display result
+            document.getElementById("result").innerHTML = "The Home Affordability Index (HAI) is: " + hai.toFixed(2) +
+                "<br>Qualifying Income: $" + qualifying_income.toFixed(2);
+
+            // Create a bar chart for income comparison
+            var incomeComparisonCtx = document.getElementById('incomeComparisonChart').getContext('2d');
+            var incomeComparisonChart = new Chart(incomeComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Median Family Income', 'Qualifying Income'],
+                    datasets: [{
+                        label: 'Income Comparison',
+                        data: [median_family_income.toFixed(2), qualifying_income.toFixed(2)],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)', // Red color for Median Family Income
+                            'rgba(54, 162, 235, 0.2)' // Blue color for Qualifying Income
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Create a bar chart for HAI comparison
+            var haiComparisonCtx = document.getElementById('haiComparisonChart').getContext('2d');
+            var haiComparisonChart = new Chart(haiComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['HAI'],
+                    datasets: [{
+                        label: 'HAI Comparison',
+                        data: [hai.toFixed(2)],
+                        backgroundColor: [
+                            hai >= 100 ? 'rgba(75, 192, 192, 0.2)' : 'rgba(255, 99, 132, 0.2)' // Green for >= 100, Red for < 100
+                        ],
+                        borderColor: [
+                            hai >= 100 ? 'rgba(75, 192, 192, 1)' : 'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 120 // Set a higher maximum for better visualization
+                        }
+                    },
+                    plugins: {
+                        annotation: {
+                            annotations: [
+                                {
+                                    type: 'line',
+                                    mode: 'horizontal',
+                                    scaleID: 'y',
+                                    value: 100,
+                                    borderColor: 'rgba(255, 0, 0, 0.7)', // Line color
+                                    borderWidth: 2, // Line width
+                                    label: {
+                                        enabled: true,
+                                        content: 'HAI Requirement (100)',
+                                        position: 'end' // Position of the label
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

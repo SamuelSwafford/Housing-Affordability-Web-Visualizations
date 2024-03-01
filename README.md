@@ -1,11 +1,23 @@
-
 # Analyzing The Relationship Between The Housing Market, Housing Affordability, and Economic Factors
-# Project Goals
-The goal of this project is to explore housing markets in the United States through the lens of housing affordability and economic measures. Metrics to represent the state of the housing market are median house prices (including list and sales price) and number of homes sold. Economic factors include median household income, unemployment, and the national mortgage interest rate set by Freddie Mac. The datasets will also be confined to the period between 2009 and 2022 and were by metropolitan area. The specific questions to be addressed are the following:
+# Project Overview
+A lot of US Citizens either lease or own their current home. A common myth of leasing goes as “why would I pay someone else’s mortgage by leasing while I could be paying my own mortgage.” As this is a big debate, there are a lot of economic factors (income, employment, unemployment, interest rates, credit score) that contribute to the decision of purchasing a home. In addition to the Economic Factors that a lot of individuals consider, the housing market: listing and selling price, interest rate, and affordability lead to potential buyers asking themselves a lot of Real Estate questions.
 
-What does housing affordability look like in the US?
-How significantly does the price of a home change from list price to sale price?
-What relationships exist between markers of economic performance and number of homes sold?
+Common Real Estate Questions:
+“Is this the perfect time to buy my home?"
+"Will I get a low interest rate?"
+"Will my purchase price be the lowest it will be in this economy?"
+
+Therefore, in this project, we focus primarily through visualizations of the US Housing Market from datasets from 2009 to 2022 to prove housing affordability changes throughout the country and over time due to economic factors. All the information comes from datasets that are online from Zillow and National Associaltion of Realtors. 
+
+A US Heat Map is color coded depending on Housing Affordability. If the HAI for a state is high, it’s color coded in a darker color. On the other hand, if a state is more affordable, it’s color coded in a lighter color. It can be concluded that the bigger cities are more expensive. Meaning, HAI is higher. 
+
+Bar Chart demonstrates the relationship between interest rate and volume of sales over time.
+It can be concluded that as interest rate is high, Selling Price is lower and so are sales low.
+When the interest rate is low, Selling price is high and sales are high.
+
+The Housing Affordability Calculator:
+You put in information of the median income, median price, down payment, and maximum monthly payment percent from income. Once all that information is submitted, it lets the user know if they would be able to afford a house or not. 
+
 
 # Industry Relevance
 The housing market is closely linked to the economy as it has contributed roughly 12% of the GDP for the last five years. This makes it the current largest contributor to the economy, almost tied with manufacturing at 11%. As such, analysis of the housing market affects people at all levels from the homeowners to policy makers and real estate professionals. Housing affordability and the size of the difference between the listing price and final sales price can both illustrate the volatility of the housing market. A more stable housing market is a factor in overall economic growth as it encourages more people to become homeowners. Of course, there are more variables that influence a person’s ability to make such a large investment, such as levels of income, unemployment, and interest rates. Breaking down some of these factors for individual analysis may help understand and even predict the market
@@ -16,8 +28,8 @@ Data for the median income and unemployment levels was sourced from the US Censu
 # Project Approach
 The analysis involves statistical methods and data visualization techniques to present trends and relationships. Python libraries like Pandas, NumPy, and Matplotlib/Seaborn were employed for data manipulation and visualization. Regression analysis was used to model the relationship between housing metrics and economic factors.
 
-# Data and Analysis
 
+# Data and Analysis
 ## Affordability
 The first area to be explored is the state of affordable housing today across the US. The Housing Affordability Index (HAI) arose as shorthand for how likely a typical family would be able to afford the average mortgage in their area. HAI is calculated by dividing the Mean Family Income (MFI) by the Qualifying Income (QI) and multiplying that by 100. The QI is a tool used to evaluate mortgage loan applications and estimates how much income is required to afford a standard mortgage. If the QI and the MFI are equal, that suggests the typical family can afford to pay one complete mortgage (an HAI index of 100). As the MFI decreases relative to the QI, a family would only be able to afford to partially pay the mortgage. The lower this number is, the less affordable a market is considered (an HAI of < 100). Conversely, an MFI greater than QI suggests that a single family could afford to pay for their mortgage and then some, implying a healthy economy (an HAI > 100). The chart below is a graphic representation of the HAI in the US in 2022.
 
@@ -65,9 +77,7 @@ The next chart presents a scatter plot comparing average MSP with mortgage rates
 
 ![Linear Regression of Average Median Sale Price vs Mortgage Interest Rate](https://github.com/Ishicka/The-Seven/assets/102836930/14c91ec4-7beb-4c6c-a9c8-f1cc717594d3)
 
+
 # Issues & Findings
 In summary, the housing market is unique due to its cyclical nature, local variations, sensitivity to interest rates, and long-term investment characteristics. While it is influenced by economic factors, its behavior can be somewhat insulated, and the market may lag behind or follow its own trajectory compared to other sectors of the economy. The interconnectedness of economic indicators and demographic trends makes predicting the housing market's movements a complex task.  From this, it is concluded that the overall relationship between the housing market, the HAI, and the economy likely has a nonlinear correlation.
 Nonlinearity implies that the relationship between housing prices and economic indicators is not proportional or straightforward. Changes in economic indicators may not result in linear changes in housing prices. Instead, the connection may be characterized by curves, thresholds, or other non-linear patterns. Interest rates, for example, can have a nonlinear impact on housing prices. Initially, lower interest rates may stimulate demand and increase prices, but excessively low rates may lead to economic instability, affecting housing prices in unexpected ways. Behavioral economics also plays a role. Buyer sentiment, perceptions of the market, and speculative behavior can introduce nonlinearities into the housing price dynamics.
-
-# Next Steps
-Information gained from this project could serve as a jumping off point for further exploration with more detailed or larger datasets. This could involve Incorporating more granular data or new variables. As previously discussed, economic policy and government intervention may impact the housing market. Expanding the analysis to include government policies could further illustrate this. Additionally, a field as large and far reaching as the housing market attracts many professionals looking to forecast future trends. Aggregating and comparing these ideas would be an interesting area to explore. All this information could ultimately be used to create a predictive model for housing market trends.
