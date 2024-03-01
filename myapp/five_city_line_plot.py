@@ -1,27 +1,40 @@
 import pandas as pd
 import matplotlib
-# Ensure matplotlib does not use any Xwindows backend.
-matplotlib.use('Agg')
+matplotlib.use('Agg')  # Prevents using any GUI backend
 import matplotlib.pyplot as plt
 
-def plot_affordability_vs_time(city1, city2, city3, city4, city5):
-    # Load your data
-    df = pd.read_csv('resources/data_interpolated.csv')
+def plot_affordability_vs_time(*cities):
+    data_file = 'resources/data_interpolated.csv'
+    # Load the data
+    data = pd.read_csv(data_file)
 
-    # Filter data for the selected cities
-    df_filtered = df[df['City'].isin([city1, city2, city3, city4, city5])]
+    # Filter the data for the specified cities and for non-null HAI (Housing Affordability Index) values
+    filtered_data = data[data['CityName'].isin(cities) & data['HAI'].notnull()]
 
-    # Plot data
-    for city in [city1, city2, city3, city4, city5]:
-        city_data = df_filtered[df_filtered['City'] == city]
-        plt.plot(city_data['Year'], city_data['Affordability'], label=city)
+    # Convert Date to datetime for plotting
+    filtered_data['Date'] = pd.to_datetime(filtered_data['Date'])
 
+    # Plotting with different colors for better differentiation
+    colors = ['blue', 'green', 'red', 'purple', 'orange']
+
+    plt.figure(figsize=(15, 8))
+
+    for city, color in zip(cities, colors):
+        city_data = filtered_data[filtered_data['CityName'] == city]
+        plt.plot(city_data['Date'], city_data['HAI'], label=city, color=color)
+
+    plt.title('Housing Affordability Index Over Time for Top 5 Cities by Population')
     plt.xlabel('Year')
-    plt.ylabel('Affordability')
-    plt.title('Affordability vs Time')
+    plt.ylabel('Housing Affordability Index (HAI)')
     plt.legend()
-    plt.savefig('static/five_city_line_plot.png')
-    plt.close(fig)
+    plt.grid(True)
+    # Add a horizontal line at 100 to indicate the threshold for affordability
+    plt.axhline(y=100, color='black', linestyle='--')
+    plt.savefig('static/five_city_line_plot.png', dpi=300)
+    plt.close()
 
 if __name__ == '__main__':
-    plot_affordability_vs_time('City1', 'City2', 'City3', 'City4', 'City5')
+    # Example usage, adjust as necessary
+    data_file = 'resources/data_interpolated.csv'
+    cities = ['New York', 'Los Angeles', 'Chicago', 'Dallas', 'Houston']  # Update with real city names for testing
+    plot_affordability_vs_time(data_file, *cities)

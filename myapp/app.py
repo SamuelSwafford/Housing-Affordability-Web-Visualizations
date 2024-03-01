@@ -14,7 +14,7 @@ def home():
     # Extract the unique city-state combinations
     cities = df[['CityName', 'StateName']].drop_duplicates()
     cities['CityState'] = cities['CityName'] + ', ' + cities['StateName']
-    city_options = cities['CityState'].tolist()
+    city_options = cities['CityName'].tolist()
 
     year = None
     plot_url = None
@@ -35,7 +35,7 @@ def home():
     return render_template('index.html', year=year, plot_url=plot_url, line_plot_url=line_plot_url, city=city, bar_and_line_plot_url=bar_and_line_plot_url, city_options=city_options)
 
 @app.route('/plot/<int:year>')
-def plot(year):
+def heatmap_plot(year):
     plot_housing_affordability(year)
     return send_from_directory('static', 'heatmap.png')
 
@@ -46,7 +46,8 @@ def line_plot(city1, city2, city3, city4, city5):
 
 @app.route('/bar_and_line_plot/<city>')
 def bar_and_line_plot(city):
-    plot_bar_and_line(city)
+    # Using 'MedianSalePrice' and 'MedianListPrice' as the columns to plot
+    plot_bar_and_line('resources/data_interpolated.csv', 'MedianSalePrice', 'MedianListPrice')
     return send_from_directory('static', 'bar_and_line_plot.png')
 
 if __name__ == '__main__':
