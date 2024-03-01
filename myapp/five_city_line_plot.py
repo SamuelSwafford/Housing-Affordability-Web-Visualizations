@@ -30,7 +30,7 @@ def plot_affordability_vs_time(*cities):
     plt.grid(True)
     # Add a horizontal line at 100 to indicate the threshold for affordability
     plt.axhline(y=100, color='black', linestyle='--')
-    plt.savefig('static/five_city_line_plot.png', dpi=300)
+    plt.savefig('static/five_city_line_plot.png')
     plt.close()
 
 if __name__ == '__main__':
