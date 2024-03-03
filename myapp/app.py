@@ -47,7 +47,7 @@ def line_plot(city1, city2, city3, city4, city5):
 @app.route('/bar_and_line_plot/<city>')
 def bar_and_line_plot(city):
     # Using 'MedianSalePrice' and 'MedianListPrice' as the columns to plot
-    plot_bar_and_line(city, "SalesTotal", "MORTGAGE30US")
+    plot_bar_and_line(city)
     return send_from_directory('static', 'bar_and_line_plot.png')
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@ def plot_affordability_vs_time(*cities):
     filtered_data = data[data['CityName'].isin(cities) & data['HAI'].notnull()]
 
     # Convert Date to datetime for plotting
-    filtered_data['Date'] = pd.to_datetime(filtered_data['Date'])
+    filtered_data.loc[:, 'Date'] = pd.to_datetime(filtered_data['Date'])
 
     # Plotting with different colors for better differentiation
     colors = ['blue', 'green', 'red', 'purple', 'orange']
@@ -35,6 +35,5 @@ def plot_affordability_vs_time(*cities):
 
 if __name__ == '__main__':
     # Example usage, adjust as necessary
-    data_file = 'resources/data_interpolated.csv'
     cities = ['New York', 'Los Angeles', 'Chicago', 'Dallas', 'Houston']  # Update with real city names for testing
-    plot_affordability_vs_time(data_file, *cities)
+    plot_affordability_vs_time(*cities)
