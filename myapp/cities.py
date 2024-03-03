@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 def plot_city_affordability(year):
     # Load the data from the uploaded CSV file
-    file_path = 'Resources/data_interpolated.csv'
+    file_path = 'resources/data_interpolated.csv'
     data = pd.read_csv(file_path)
 
     # Filter data for the specified year and cities
@@ -18,4 +18,3 @@ def plot_city_affordability(year):
     # Save the plot directly to the static directory
     plt.savefig('static/cityHAI.png')
     plt.close(fig)
-   
