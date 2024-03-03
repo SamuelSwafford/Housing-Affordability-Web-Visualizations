@@ -1,4 +1,5 @@
 critical:
+-Modify bar_and_line_plot.py so that it takes a varriable and returns that varribale as a line plot
 -Make sure both city and state is displayed
 -Make sure one of the plots uses seaborne
 -Make one of the plots interactive using plotly
