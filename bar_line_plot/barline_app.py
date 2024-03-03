@@ -83,18 +83,24 @@ def plot_with_secondary_axis(y_variable):
         data=us_data,
         x=us_data.index,
         y=us_data["Sales Total"],
-        color="blue",
+        palette="husl",
         saturation=0.75,
         fill=True,
     )
-    sns.set_style("white")
-    sns.color_palette("husl", 9)
+    plt.grid(axis="both", color="gray", linestyle="--", linewidth=0.5, alpha=0.75)
 
     # Create a secondary y-axis
     ax2 = plt.gca().twinx()
 
     # Your Seaborn line plot
-    sns.lineplot(x=us_data.index, y=y_variable, data=us_data, color="red", ax=ax2)
+    sns.lineplot(
+        x=us_data.index,
+        y=y_variable,
+        data=us_data,
+        color="darkslategrey",
+        ax=ax2,
+        linewidth=3.5,
+    )
 
     # Set x-axis ticks and labels
     plt.xticks(ticks=us_data.index, labels=us_data["Year"])
