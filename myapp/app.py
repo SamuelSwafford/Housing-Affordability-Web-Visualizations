@@ -9,38 +9,37 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    # Load the data from CSV
     df = pd.read_csv('resources/data_interpolated.csv')
     cities = df[['CityName', 'StateName']].drop_duplicates()
     cities['CityState'] = cities['CityName'] + ', ' + cities['StateName']
     city_options = cities['CityName'].tolist()
+    
+    # Determine allowed columns for 'col' variable
+    allowed_columns = df.select_dtypes(include='number').columns.tolist()
+    allowed_columns.remove('Year')
+    allowed_columns.remove('SalesTotal')
+    col_options = allowed_columns  # This will be passed to the template
 
     # Initialize variables to None; they may be updated based on form input
     year = None
-    city1, city2, city3, city4, city5, city = (None,)*6
+    city1, city2, city3, city4, city5, city, col = (None,)*7
 
     if request.method == 'POST':
-        # Extract form data
         year = request.form.get('year')
-        print(year)
-        print(type(year))
         city1 = request.form.get('city1')
         city2 = request.form.get('city2')
         city3 = request.form.get('city3')
         city4 = request.form.get('city4')
         city5 = request.form.get('city5')
         city = request.form.get('city')
+        col = request.form.get('col')  # Retrieve the selected column for the bar and line plot
 
-        # Call plotting functions to regenerate plots based on the new input
-        # These functions overwrite the existing SVG files in the 'static' directory
-        plot_housing_affordability(year)  # Make sure this saves to 'heatmap.svg'
-        # Assuming plot_affordability_vs_time and plot_bar_and_line are updated to save to their respective .svg files
+        plot_housing_affordability(year)
         plot_affordability_vs_time(city1, city2, city3, city4, city5)
-        plot_bar_and_line(city)
+        plot_bar_and_line(city, col)  # Pass both city and col to the plotting function
 
-    # Pass a cache buster to the template to force browsers to reload the updated images
     cache_buster = time.time()
-    return render_template('index.html', cache_buster=cache_buster, city_options=city_options)
+    return render_template('index.html', cache_buster=cache_buster, city_options=city_options, col_options=col_options)
 
 if __name__ == '__main__':
     app.run(debug=True)

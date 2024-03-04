@@ -31,6 +31,16 @@
             </select>
         </div>
 
+        <!-- New dropdown for selecting the metric for the Bar and Line Plot -->
+        <div>
+            <label for="col">Select Metric for Bar and Line Plot:</label>
+            <select name="col" id="col">
+                {% for col in col_options %}
+                <option value="{{ col }}">{{ col }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
         <div>
             <label>Select Cities for Five City Line Plot:</label>
             {% for i in range(1, 6) %}
