@@ -1,12 +1,16 @@
 critical:
--Make sure both city and state is displayed
+-add input to bar and line plot for line plotting variable
 -Make sure one of the plots uses seaborne
--Make one of the plots interactive using plotly
 -Make sure data comes from a .sqlite file not a csv (figure out how to do this using sqlalchemy)
 -Clean up the repo so it only contains files
-
+-Make sure both city and state is displayed in drop-down menus and plots
 
 optional:
 -Have it built into the site that the data is directly taken from the web and imported into the database
 -Make the website sexier
     -Have the website start with a default page that users can modify by resubmitting the forum
+-Make one of the plots interactive using plotly
+
+*add tags for stable versions
+
+
