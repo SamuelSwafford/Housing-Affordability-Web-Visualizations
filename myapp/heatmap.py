@@ -35,7 +35,7 @@ def plot_housing_affordability(year):
     merged_map_data = us_states_map.merge(average_hai_per_state, on='StateName', how='left')
 
     # Plot the Map
-    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
+    fig, ax = plt.subplots(1, 1, figsize=(15, 8))
     merged_map_data.plot(column='HAI', ax=ax, legend=True, cmap='OrRd', edgecolor='black', linewidth=0.3)
     ax.set_title(f'Average Housing Affordability by State in {year}', fontsize=15)
     plt.axis('off')

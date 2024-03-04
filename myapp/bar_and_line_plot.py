@@ -24,7 +24,8 @@ def plot_bar_and_line(city='United States', col='MORTGAGE30US'):
 
     df = df.resample('Y').agg({'SalesTotal': 'sum', col: 'mean'})
 
-    fig, ax1 = plt.subplots()
+    fig, ax1 = plt.subplots(figsize = (15, 8))
+    
     ax2 = ax1.twinx()
 
     ax2.bar(df.index.year, df['SalesTotal'], color='blue', zorder=0, alpha=.5, label='Sales Total')
