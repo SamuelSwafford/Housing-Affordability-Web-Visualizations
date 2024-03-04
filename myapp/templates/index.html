@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Housing Affordability Visualizations</title>
+    <!-- <style>
+        img.responsive-svg {
+            max-width: 100%; /* Ensures the image is never wider than its container */
+            height: auto; /* Maintains aspect ratio */
+            display: block; /* Fixes default img inline behavior */
+            margin: 0 auto; /* Centers the image */
+        }
+    </style> -->
 </head>
 <body>
     <h1>Housing Affordability Visualizations</h1>
@@ -38,19 +46,16 @@
         <button type="submit">Generate Plots</button>
     </form>
 
-    {% if plot_url %}
-    <h2>Heatmap for Year: {{ year }}</h2>
-    <img src="{{ plot_url }}" alt="Heatmap Plot">
-    {% endif %}
+    {% if cache_buster %}
+        <!-- Direct references to static SVG files with cache-buster -->
+        <h2>Heatmap for Year</h2>
+        <img class="responsive-svg" src="{{ url_for('static', filename='heatmap.svg') }}?{{ cache_buster }}" alt="Heatmap Plot">
 
-    {% if line_plot_url %}
-    <h2>Five City Line Plot</h2>
-    <img src="{{ line_plot_url }}" alt="Five City Line Plot">
-    {% endif %}
+        <h2>Five City Line Plot</h2>
+        <img class="responsive-svg" src="{{ url_for('static', filename='five_city_line_plot.svg') }}?{{ cache_buster }}" alt="Five City Line Plot">
 
-    {% if bar_and_line_plot_url %}
-    <h2>Bar and Line Plot for {{ city }}</h2>
-    <img src="{{ bar_and_line_plot_url }}" alt="Bar and Line Plot">
+        <h2>Bar and Line Plot</h2>
+        <img class="responsive-svg" src="{{ url_for('static', filename='bar_and_line_plot.svg') }}?{{ cache_buster }}" alt="Bar and Line Plot">
     {% endif %}
 </body>
 </html>

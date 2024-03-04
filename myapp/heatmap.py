@@ -15,6 +15,7 @@ def plot_housing_affordability(year):
     Returns:
     None
     """
+    year = int(year)
     # Load the data from the uploaded CSV file
     file_path = 'resources/data_interpolated.csv'
     data = pd.read_csv(file_path)
@@ -40,8 +41,7 @@ def plot_housing_affordability(year):
     plt.axis('off')
 
     # Save the plot directly to the static directory
-    plt.savefig('static/heatmap.png')
-    plt.close(fig)
+    plt.savefig('static/heatmap.svg')
 
 # This ensures that the script can be imported and called from elsewhere without immediately executing.
 if __name__ == '__main__':

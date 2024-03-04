@@ -32,7 +32,7 @@ def plot_bar_and_line( city = 'United States'):  # Renamed function
     ax1.set_xlabel('Time')
     ax1.set_ylabel('MORTGAGE30US')
     ax2.set_ylabel('Sales Total')
-    plt.title('Bar and Line Plot')
+    plt.title('Mortgage Rate and Sales Total Over Time for ' + city)
 
     # Add legends
     plt.legend([line, bar], ['MORTGAGE30US', 'Sales Total'])
@@ -40,7 +40,7 @@ def plot_bar_and_line( city = 'United States'):  # Renamed function
     # Move the line plot to the front
     ax1.set_zorder(ax2.get_zorder() + 1)
     ax1.patch.set_visible(False)
-    plt.savefig('static/bar_and_line_plot.png')
+    plt.savefig('static/bar_and_line_plot.svg')
 
     plt.close()
 if __name__ == '__main__':
