@@ -23,7 +23,7 @@ def plot_affordability_vs_time(*cities):
         city_data = filtered_data[filtered_data['CityName'] == city]
         plt.plot(city_data['Date'], city_data['HAI'], label=city, color=color)
 
-    plt.title('Housing Affordability Index Over Time for Top 5 Cities by Population')
+    plt.title('Housing Affordability Index Over Time for ' + ', '.join(cities) + ' cities')
     plt.xlabel('Year')
     plt.ylabel('Housing Affordability Index (HAI)')
     plt.legend()
