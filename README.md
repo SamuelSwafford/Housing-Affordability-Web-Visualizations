@@ -1,7 +1,33 @@
-# Analyzing The Relationship Between The Housing Market, Housing Affordability, and Economic Factors
+#  Housing Affordability Web Visualization 
 # Industry Relevance
-The housing market is closely linked to the economy as it has contributed roughly 12% of the GDP for the last five years. This makes it the current largest contributor to the economy, almost tied with manufacturing at 11%. As such, analysis of the housing market affects people at all levels from the homeowners to policy makers and real estate professionals. Housing affordability and the size of the difference between the listing price and final sales price can both illustrate the volatility of the housing market. A more stable housing market is a factor in overall economic growth as it encourages more people to become homeowners. Of course, there are more variables that influence a person’s ability to make such a large investment, such as levels of income, unemployment, and interest rates. Breaking down some of these factors and the creation of the Housing Affordability Calculator for individual analysis may help understand affordability and even predict the market. http://127.0.0.1:5000/ (link to HAI Calculator)
+The housing market is closely linked to the economy as it has contributed roughly 12% of the GDP for the last five years. This makes it the current largest contributor to the economy, almost tied with manufacturing at 11%. As such, analysis of the housing market affects people at all levels from the homeowners to policy makers and real estate professionals. Housing affordability and the size of the difference between the listing price and final sales price can both illustrate the volatility of the housing market. A more stable housing market is a factor in overall economic growth as it encourages more people to become homeowners. Of course, there are more variables that influence a person’s ability to make such a large investment, such as levels of income, unemployment, and interest rates. 
+
+# Home Affordability Index Calculator (HAI)
+ http://127.0.0.1:5000/ (link to HAI Calculator)
 <img width="449" alt="Screenshot 2024-03-04 163103" src="https://github.com/SamuelSwafford/Housing-Affordability-Web-Visualizations/assets/52751074/4cf5d9c5-eab1-43d6-9a8d-531b429c9bbf">
+
+# How the Calculator Can Be Used:
+## Accessing the Calculator:
+Users can access the HAI calculator through a web browser by running the Flask application provided in the script.
+## Inputting Data:
+The calculator presents a form with input fields for essential financial parameters, such as median family income, median home price, mortgage interest rate, down payment percentage, and max monthly payment percentage.
+Entering Financial Information:
+Users should input their financial information into the respective form fields. These values are crucial for calculating the HAI.
+Clicking "Calculate HAI":
+After entering the required information, users can click the "Calculate HAI" button.
+## HAI Calculation:
+The Flask application's calculate_hai function processes the user-inputted data to calculate the Home Affordability Index (HAI) and the qualifying income.
+## Result Display:
+The calculated HAI and qualifying income are displayed on the web page. 
+## Interpreting the Results:
+Users can interpret the HAI result to understand whether their income is sufficient to qualify for a mortgage on a median-priced home.
+The provided interpretation gives context to the HAI value, helping users assess their housing affordability.
+## Charts:
+The calculator also includes two bar charts for income comparison and HAI comparison, providing visual representations of the user's financial situation.
+## Making Informed Decisions:
+Users can use the calculated HAI and interpretation to make informed decisions about their ability to afford a mortgage on a median-priced home.
+In summary, the HAI calculator is a tool that empowers users to assess their housing affordability by considering key financial parameters. It provides valuable insights into whether a typical family with the provided income could qualify for a mortgage on a median-priced home, and the interpretation aids users in understanding the implications of the calculated HAI.
+
 
 # Data and Analysis
 ## Affordability
