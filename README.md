@@ -1,4 +1,5 @@
 #  Housing Affordability Web Visualization 
+  ##  Data Visualization Track
 # Industry Relevance
 The housing market is closely linked to the economy as it has contributed roughly 12% of the GDP for the last five years. This makes it the current largest contributor to the economy, almost tied with manufacturing at 11%. As such, analysis of the housing market affects people at all levels from the homeowners to policy makers and real estate professionals. Housing affordability and the size of the difference between the listing price and final sales price can both illustrate the volatility of the housing market. A more stable housing market is a factor in overall economic growth as it encourages more people to become homeowners. Of course, there are more variables that influence a person’s ability to make such a large investment, such as levels of income, unemployment, and interest rates. 
 
