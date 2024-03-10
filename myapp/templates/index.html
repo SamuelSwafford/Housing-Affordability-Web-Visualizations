@@ -23,10 +23,10 @@
         </div>
         
         <div>
-            <label for="city">Select City for Bar and Line Plot:</label>
+            <label for="city">Select City-State for Bar and Line Plot:</label>
             <select name="city" id="city">
                 {% for city in city_options %}
-                <option value="{{ city }}" {% if city == 'New York' %}selected{% endif %}>{{ city }}</option>
+                <option value="{{ city }}" {% if city == 'New York, NY' %}selected{% endif %}>{{ city }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -41,8 +41,8 @@
         </div>
 
         <div>
-            <label>Select Cities for Five City Line Plot:</label>
-            {% set default_cities = ['New York', 'Chicago', 'Los Angeles', 'Dallas', 'Houston'] %}
+            <label>Select City-States for Five City Line Plot:</label>
+            {% set default_cities = ['New York, NY', 'Chicago, IL', 'Los Angeles, CA', 'Dallas, TX', 'Houston, TX'] %}
             {% for i in range(1, 6) %}
             <select name="city{{i}}">
                 {% for city in city_options %}
@@ -57,13 +57,13 @@
 
     {% if cache_buster %}
         <!-- Direct references to static SVG files with cache-buster -->
-        <h2>Heatmap of Housing Affordability Index For Selected year</h2>
+        <h2>Heatmap of Housing Affordability Index For Selected Year</h2>
         <img class="responsive-svg" src="{{ url_for('static', filename='heatmap.svg') }}?{{ cache_buster }}" alt="Heatmap Plot">
 
-        <h2>Five City Line Plot Of Affordability Over Time For Selected Cities</h2>
+        <h2>Five City Line Plot Of Affordability Over Time For Selected City-States</h2>
         <img class="responsive-svg" src="{{ url_for('static', filename='five_city_line_plot.svg') }}?{{ cache_buster }}" alt="Five City Line Plot">
 
-        <h2>Bar and Line Plot of Total Sales And Selected Data Over Time</h2>
+        <h2>Bar and Line Plot of Total Sales And Selected Data Over Time For Selected City-State</h2>
         <img class="responsive-svg" src="{{ url_for('static', filename='bar_and_line_plot.svg') }}?{{ cache_buster }}" alt="Bar and Line Plot">
     {% endif %}
 </body>

@@ -11,8 +11,10 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 def home():
     df = pd.read_csv('resources/data_interpolated.csv')
     cities = df[['CityName', 'StateName']].drop_duplicates()
+    # Create a 'CityState' column for city-state combinations
     cities['CityState'] = cities['CityName'] + ', ' + cities['StateName']
-    city_options = cities['CityName'].tolist()
+    # Populate city_options with 'CityState' for dropdown options
+    city_options = cities['CityState'].tolist()
     
     # Determine allowed columns for 'col' variable
     allowed_columns = df.select_dtypes(include='number').columns.tolist()
@@ -34,6 +36,7 @@ def home():
         city = request.form.get('city')
         col = request.form.get('col')  # Retrieve the selected column for the bar and line plot
 
+        # Pass city-state combinations to plot functions; ensure they can handle it
         plot_housing_affordability(year)
         plot_affordability_vs_time(city1, city2, city3, city4, city5)
         plot_bar_and_line(city, col)  # Pass both city and col to the plotting function

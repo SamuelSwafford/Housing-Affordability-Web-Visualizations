@@ -4,7 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-def plot_bar_and_line(city='United States', col='MORTGAGE30US'):
+def plot_bar_and_line(city_state='United States', col='MORTGAGE30US'):
     df = pd.read_csv('resources/data_interpolated.csv')
     allowed_columns = df.select_dtypes(include='number').columns.tolist()
     allowed_columns.remove('Year')
@@ -13,6 +13,9 @@ def plot_bar_and_line(city='United States', col='MORTGAGE30US'):
     
     if col not in allowed_columns:
         raise ValueError(f'Invalid column "{col}". Allowed columns are {allowed_columns}')
+    
+    # Extract city name from city-state combination
+    city = city_state.split(',')[0] if ',' in city_state else city_state
     
     df = df[df['CityName'] == city]
     df = df[['Date', 'SalesTotal', col]]
@@ -34,7 +37,7 @@ def plot_bar_and_line(city='United States', col='MORTGAGE30US'):
     ax1.set_xlabel('Time')
     ax1.set_ylabel(col)
     ax2.set_ylabel('Sales Total')
-    plt.title(f'{col} and Sales Total Over Time for {city}')
+    plt.title(f'{col} and Sales Total Over Time for {city_state}')
 
     plt.legend()
 
@@ -45,7 +48,7 @@ def plot_bar_and_line(city='United States', col='MORTGAGE30US'):
     plt.close()
 
 if __name__ == '__main__':
-    # Example usage
-    city = 'Chicago'
+    # Example usage with city-state combination
+    city_state = 'Chicago, IL'  # Adjusted to include state abbreviation for clarity
     col = 'MORTGAGE30US'  # Ensure this is a valid column name as per your dataset
-    plot_bar_and_line(city, col)
+    plot_bar_and_line(city_state, col)
