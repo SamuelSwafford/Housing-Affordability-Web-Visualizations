@@ -2,36 +2,40 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')  # Prevents using any GUI backend
 import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings("ignore")
 
 def plot_affordability_vs_time(*cities):
-    data_file = 'resources/data_interpolated.csv'
-    # Load the data
-    data = pd.read_csv(data_file)
+    with plt.style.context('fivethirtyeight'):
+        data_file = 'resources/data_interpolated.csv'
+        # Load the data
+        data = pd.read_csv(data_file)
 
-    # Filter the data for the specified cities and for non-null HAI (Housing Affordability Index) values
-    filtered_data = data[data['CityName'].isin(cities) & data['HAI'].notnull()]
+        # Filter the data for the specified cities and for non-null HAI (Housing Affordability Index) values
+        filtered_data = data[data['CityName'].isin(cities) & data['HAI'].notnull()]
 
-    # Convert Date to datetime for plotting
-    filtered_data.loc[:, 'Date'] = pd.to_datetime(filtered_data['Date'])
+        # Convert Date to datetime for plotting
+        filtered_data.loc[:, 'Date'] = pd.to_datetime(filtered_data['Date'])
 
-    # Plotting with different colors for better differentiation
-    colors = ['blue', 'green', 'red', 'purple', 'orange']
+        # Plotting with different colors for better differentiation
+        colors = ['blue', 'green', 'red', 'purple', 'orange']
 
-    plt.figure(figsize=(15, 8))
+        plt.figure(figsize=(15, 8))
 
-    for city, color in zip(cities, colors):
-        city_data = filtered_data[filtered_data['CityName'] == city]
-        plt.plot(city_data['Date'], city_data['HAI'], label=city, color=color)
+        for city, color in zip(cities, colors):
+            city_data = filtered_data[filtered_data['CityName'] == city]
+            sns.lineplot(x='Date', y='HAI', data=city_data, label=city, color=color, ci=None)
 
-    plt.title('Housing Affordability Index Over Time for ' + ', '.join(cities) + ' cities')
-    plt.xlabel('Year')
-    plt.ylabel('Housing Affordability Index (HAI)')
-    plt.legend()
-    plt.grid(True)
-    # Add a horizontal line at 100 to indicate the threshold for affordability
-    plt.axhline(y=100, color='black', linestyle='--')
-    plt.savefig('static/five_city_line_plot.svg')
-    plt.close()
+        plt.title('Housing Affordability Index Over Time for ' + ', '.join(cities) + ' cities')
+        plt.xlabel('Year')
+        plt.ylabel('Housing Affordability Index (HAI)')
+        plt.legend()
+        plt.grid(True)
+        # Add a horizontal line at 100 to indicate the threshold for affordability
+        plt.axhline(y=100, color='black', linestyle='--')
+        plt.savefig('static/five_city_line_plot.svg')
+        plt.close()
 
 if __name__ == '__main__':
     # Example usage, adjust as necessary
